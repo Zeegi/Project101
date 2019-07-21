@@ -82,6 +82,10 @@ class App extends Component {
     this.setState({ userLogged: true })
   };
 
+  logOff = () => {
+    this.setState({ userLogged: false })
+  };
+
   render() {
     const infoStyle = {
       color: 'orange',
@@ -103,20 +107,15 @@ class App extends Component {
                 <button className="App-button" type="button" onClick={() => this.imageProcess('select area')}>Select Area</button>
                 <button className="App-button" type="button" onClick={() => this.imageProcess('filter2')}>Filter 10 Places</button>
                 <button className="App-button" type="button" onClick={() => this.imageProcess('filter3')}>Filter 5 Places</button>
+                <button className="App-button" type="button" onClick={() => this.logOff()}>Log off</button>
               </div>
               <tr>
-                <td>
-                  <tr>
-                    <button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('image1')}>Image 1 </button>
-                  </tr>
-                  <tr>
-                    <button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('image2')}>Image 2</button>
-                  </tr>
-                  <tr>
-                    <button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('button3')}> Get PDF</button>
-                  </tr>
+                <td valign="top">
+                    <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('image1')}>Image 1 </button></tr>
+                    <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('image2')}>Image 2</button></tr>
+                    <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('button3')}> Get PDF</button></tr>
                 </td>
-                <td>
+                <td rowSpan="3">
                   <div className="App">
                   {onMapLoad && (
                       <div>
@@ -257,7 +256,7 @@ class App extends Component {
                       </div>
                     )
                     }
-                                        {image2 && (
+                    {image2 && (
                       <div>
                         <img src={Image1} alt="Logo" />
                       </div>
