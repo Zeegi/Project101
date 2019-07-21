@@ -9,7 +9,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      onMapLoad:true,
+      Criteria1: false,
+      Criteria2: false,
+      onMapLoad: true,
       image1: false,
       image2: false,
       image3: false,
@@ -25,6 +27,8 @@ class App extends Component {
 
   loadImage(event) {
     this.setState({
+      Criteria1:false,
+      Criteria2: false,
       onMapLoad: false,
       toDisplay: false,
       largeSize: false,
@@ -42,6 +46,8 @@ class App extends Component {
 
   imageProcess(event) {
     this.setState({
+      Criteria2: false,
+      Criteria1: false,
       onMapLoad: false,
       toDisplay: false,
       largeSize: false,
@@ -58,6 +64,12 @@ class App extends Component {
     }
     if (event === 'filter3') {
       this.setState({ mediumSize: true })
+    }
+    if (event === 'Criteria1') {
+      this.setState({ Criteria1: true })
+    }
+    if (event === 'Criteria2') {
+      this.setState({ Criteria2: true })
     }
   };
 
@@ -91,12 +103,13 @@ class App extends Component {
       color: 'orange',
       fontSize: 14,
     };
-    const triangleCoords = [
-      { lat: 1.3024011, lng: 103.796127 },
-      { lat: 1.2758387, lng: 103.6766169 },
-      { lat: 1.4414698, lng: 103.7707968 }
-    ];
-    const { userLogged, toDisplay, largeSize, mediumSize, selectedPlace, image1, image2, onMapLoad } = this.state;
+    // const triangleCoords = [
+    //   { lat: 1.3024011, lng: 103.796127 },
+    //   { lat: 1.2758387, lng: 103.6766169 },
+    //   { lat: 1.4414698, lng: 103.7707968 }
+    // ];
+
+    const { userLogged, toDisplay, largeSize, mediumSize, selectedPlace, image1, image2, onMapLoad, Criteria1, Criteria2 } = this.state;
     return (
       <div>
         {!(userLogged)
@@ -109,15 +122,19 @@ class App extends Component {
                 <button className="App-button" type="button" onClick={() => this.imageProcess('filter3')}>Filter 5 Places</button>
                 <button className="App-button" type="button" onClick={() => this.logOff()}>Log off</button>
               </div>
+              <div className='App-spacing'>
+                <button className="App-button" type="button" onClick={() => this.imageProcess('Criteria1')}>Criteria 1</button>
+                <button className="App-button" type="button" onClick={() => this.imageProcess('Criteria2')}>Criteria 2</button>
+              </div>
               <tr>
                 <td valign="top">
-                    <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('image1')}>Image 1 </button></tr>
-                    <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('image2')}>Image 2</button></tr>
-                    <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('button3')}> Get PDF</button></tr>
+                  <tr><button className="App-button cell-spacing" type="button" >Snap Image</button></tr>
+                  <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('image2')}>Segment Building</button></tr>
+                  <tr><button className="App-button cell-spacing" type="button" onClick={() => this.loadImage('button3')}> Generate PDF</button></tr>
                 </td>
                 <td rowSpan="3">
                   <div className="App">
-                  {onMapLoad && (
+                    {onMapLoad && (
                       <div>
                         <Map google={this.props.google} zoom={11}
                           style={{ width: '80%', height: '80%', position: 'relative' }}
@@ -133,13 +150,13 @@ class App extends Component {
                           style={{ width: '80%', height: '80%', position: 'relative' }}
                           initialCenter={{ lat: 1.3024011, lng: 103.796127 }}
                         >
-                          <Polygon
+                          {/* <Polygon
                             paths={triangleCoords}
                             strokeColor="#0000FF"
                             strokeOpacity={0.8}
                             strokeWeight={2}
                             fillColor="#0000FF"
-                            fillOpacity={0.35} />
+                            fillOpacity={0.35} /> */}
                         </Map>
                       </div>
                     )
@@ -204,7 +221,7 @@ class App extends Component {
                             marker={this.state.activeMarker}
                             visible={this.state.showingInfoWindow}>
                             <div>
-                              <h1 style={infoStyle}>{selectedPlace}</h1>
+                              <h1 style={infoStyle}>{selectedPlace} </h1>
                             </div>
                           </InfoWindow>
                           <Marker
@@ -257,6 +274,18 @@ class App extends Component {
                     )
                     }
                     {image2 && (
+                      <div>
+                        <img src={Image1} alt="Logo" />
+                      </div>
+                    )
+                    }
+                    {Criteria1 && (
+                      <div>
+                        <img src={Image2} alt="Logo" />
+                      </div>
+                    )
+                    }
+                    {Criteria2 && (
                       <div>
                         <img src={Image1} alt="Logo" />
                       </div>
