@@ -103,11 +103,11 @@ class App extends Component {
       color: 'orange',
       fontSize: 14,
     };
-    // const triangleCoords = [
-    //   { lat: 1.3024011, lng: 103.796127 },
-    //   { lat: 1.2758387, lng: 103.6766169 },
-    //   { lat: 1.4414698, lng: 103.7707968 }
-    // ];
+    const triangleCoords = [
+      { lat: 1.3024011, lng: 103.796127 },
+      { lat: 1.2758387, lng: 103.6766169 },
+      { lat: 1.4414698, lng: 103.7707968 }
+    ];
 
     const { userLogged, toDisplay, largeSize, mediumSize, selectedPlace, image1, image2, onMapLoad, Criteria1, Criteria2 } = this.state;
     return (
@@ -150,13 +150,13 @@ class App extends Component {
                           style={{ width: '80%', height: '80%', position: 'relative' }}
                           initialCenter={{ lat: 1.3024011, lng: 103.796127 }}
                         >
-                          {/* <Polygon
+                          <Polygon
                             paths={triangleCoords}
                             strokeColor="#0000FF"
                             strokeOpacity={0.8}
                             strokeWeight={2}
                             fillColor="#0000FF"
-                            fillOpacity={0.35} /> */}
+                            fillOpacity={0.35} />
                         </Map>
                       </div>
                     )
